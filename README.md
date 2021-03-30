@@ -1,8 +1,5 @@
-# angular-spectator-example
-An example of Angular with Spectator
 # AngularSpectatorExample
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+An example of Angular with Spectator. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Development server
 
