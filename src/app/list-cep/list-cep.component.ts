@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'node:cluster';
+import { Address } from './address.model';
 import { ListCepService } from './list-cep.service';
 
 @Component({
