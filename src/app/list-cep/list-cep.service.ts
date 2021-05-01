@@ -1,15 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { Address } from './address.model';
+import { ListCepAPI } from './list-cep.api';
 @Injectable({
   providedIn: 'root'
 })
 export class ListCepService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private api: ListCepAPI){}
 
-  getAddress(): any {
-    const url = 'viacep.com.br/ws/01001000/json/';
-    return this.http.get<any>(url);
+  async getAddress(cep: string): Promise<Address> {
+    const result = await this.api.findAddress(cep);
+    result.enderecoCompleto = `${result.logradouro}, ${result.bairro}, ${result.localidade}`;
+    console.log(result);
+    
+    return result;
+  }
+
+  getTest(): string {
+    return 'Hello: fixed text;';
   }
 }

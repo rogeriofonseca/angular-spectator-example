@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Address } from 'node:cluster';
+import { ListCepService } from './list-cep.service';
 
 @Component({
   selector: 'app-list-cep',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCepComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: ListCepService) { }
+  address: Address;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const teste = this.service.getAddress('38660');
+    console.log(teste);
   }
-
 }
