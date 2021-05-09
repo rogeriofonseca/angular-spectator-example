@@ -3,30 +3,28 @@
     <!-- A simple primary alert—check it out asdass! -->
   </div>
   <!-- Content here -->
-  <div class="container-fluid text-center mt-3 mb-3 d-flex">
+  <form>
+    <div class="container-fluid text-center mt-3 mb-3 d-flex">
       <div>
-      <form>
-          <input class="form-control" type="search" placeholder="cep search..."
-              autofocus>
-      </form>
+        <input [(ngModel)]="cepNumber" name="cepNumber" class="form-control" 
+        type="search" placeholder="cep search..." mask="00000-000"
+        autofocus>
+      </div>
+      <div class="ml-2">
+        <button (click)="clickSearch()" type="button" 
+            id="searchAddress" name="searchAddress" class="btn btn-primary">
+            Buscar CEP
+        </button>
+      </div>
     </div>
-    <div class="ml-2">
-      <button class="btn btn-primary" id="searchCEP" type="button" mat-button >
-        Buscar CEP
-      </button>
-    </div>
-  </div>
+  </form>
   <div class="container-fluid">
     <div class="row">
-      <!-- <div class="col">{{}}</div> -->
-      <div class="col">col</div>
-      <div class="col">col</div>
-      <div class="col">col</div>
+      <div id="localidade" class="col-12"><b>Localidade:</b> {{address.localidade}}</div>
+      <div id="cep" class="col-12"><b>CEP:</b> {{address.cep}}</div>
+      <div id="logradouro" class="col-12"><b>Logradouro:</b> {{address.logradouro}}</div>
+      <div id="bairro" class="col-12"><b>Bairro:</b> {{address.bairro}}</div>
+      <div id="uf" class="col-12"><b>UF:</b> {{address.uf}}</div>
+      <div id="enderecoCompleto" class="col-12"><b>Endereço completo:</b> {{address.enderecoCompleto}}</div>
     </div>
-    <div class="row">
-      <div class="col">col</div>
-      <div class="col">col</div>
-      <div class="col">col</div>
-      <div class="col">col</div>
-    </div>
-</div>
+  </div>

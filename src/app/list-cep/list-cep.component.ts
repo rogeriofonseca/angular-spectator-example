@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Address } from './address.model';
 import { ListCepService } from './list-cep.service';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
 
 @Component({
   selector: 'app-list-cep',
@@ -8,12 +10,19 @@ import { ListCepService } from './list-cep.service';
   styleUrls: ['./list-cep.component.css']
 })
 export class ListCepComponent implements OnInit {
+  address: Address;
+  cepNumber = '01001000';
 
   constructor(private service: ListCepService) { }
-  address: Address;
 
-  async ngOnInit(): Promise<void> {
-    const teste = this.service.getAddress('38660');
-    console.log(teste);
+  ngOnInit():void {
+    this.clickSearch();
   }
+  
+  
+  async clickSearch(): Promise<void> {
+    this.address = await this.service.getAddress(this.cepNumber);
+    window.event.preventDefault();
+  }
+
 }

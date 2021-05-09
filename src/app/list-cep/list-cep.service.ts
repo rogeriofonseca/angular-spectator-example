@@ -11,7 +11,6 @@ export class ListCepService {
   async getAddress(cep: string): Promise<Address> {
     const result = await this.api.findAddress(cep);
     result.enderecoCompleto = `${result.logradouro}, ${result.bairro}, ${result.localidade}`;
-    console.log(result);
     
     return result;
   }

@@ -1,4 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { SpyObject } from '@ngneat/spectator';
 import {
   Spectator,
   createComponentFactory,
@@ -14,6 +16,7 @@ import { ListCepService } from './list-cep.service';
 describe('ListCepComponent', () => {
   const createComponent = createComponentFactory({
     component: ListCepComponent,
+    imports: [FormsModule],
     mocks: [
       ListCepAPI,
     ],
@@ -28,26 +31,44 @@ describe('ListCepComponent', () => {
   let spectatorService: SpectatorService<ListCepService>;
   let component: ListCepComponent;
 
+  let service: SpyObject<ListCepService>;
+  let apiMocked: SpyObject<ListCepAPI>;
+  
   beforeEach(() => {
     spectatorComponent = createComponent();
     spectatorService = createService();
     component = spectatorComponent.component;
+    service = spectatorComponent.inject<ListCepService>(ListCepService);
+    apiMocked = spectatorService.inject<ListCepAPI>(ListCepAPI);
+    apiMocked.findAddress.andReturn(Promise.resolve(fakeResponse));
   });
-
+  
   it('should exist component', () => {
-    expect(spectatorComponent).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it('should return result mocked', async () => {
-    const service = spectatorComponent.inject<ListCepService>(ListCepService);
-    const apiMocked = spectatorService.inject<ListCepAPI>(ListCepAPI);
-    apiMocked.findAddress.andReturn(fakeResponse);
-    spectatorComponent.detectChanges();
-    
+  it('should exist service', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should exist apiMocked', () => {
+    expect(apiMocked).toBeTruthy();
+  });
+  
+  it('should check service result', async () => {
     const result = await service.getAddress();
     console.log(result);
-
+    
     expect(dataExpect).toEqual(result);
+  });
+  
+  it('should click button', async () => {
+    spectatorComponent.click('#searchAddress');
+    spectatorComponent.detectChanges();
+    const enderecoCompleto = spectatorComponent.query('#enderecoCompleto').textContent;
+
+    const enderecoCompletoExpected = 'Endereço completo: Praça da Sé, Sé, São Paulo'
+    expect(enderecoCompletoExpected).toEqual(enderecoCompleto);
   });
 
   const fakeResponse: Address = {

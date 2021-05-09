@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListCepComponent } from './list-cep/list-cep.component';
+import { FormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,10 @@ import { ListCepComponent } from './list-cep/list-cep.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
